@@ -17,7 +17,7 @@ jobs:
     - name: Build client Docker image
       run: docker build -f ./client/Dockerfile.dev -t eggop1992/react-test ./client
     - name: Run tests
-      run: docker run eggop1992/react-test npm test
+      run: docker run -e CI=true eggop1992/react-test npm test
 
   build:
     needs: test
