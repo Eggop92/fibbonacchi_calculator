@@ -8,11 +8,28 @@ on:
 
 jobs:
 
-  build:
+  test:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Build client Docker image
+      run: docker build --f ./client/Dockerfile.dev -t eggop1992/react-test:$(date +%s) ./client
+    - name: Run tests
+      run: docker run eggop1992/react-test:$(date +%s) npm test
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build client Docker image
+      run: docker build -t eggop1992/prod-fib-client:latest ./client
+    - name: Build server docker image 
+      run: docker build -t eggop1992/prod-fib-server:latest ./server   
+    - name: Build nginx docker image
+      run: docker build -t eggop1992/prod-fib-nginx:latest ./nginx
+    - name: Build worker docker image
+      run: docker build -t eggop1992/prod-fib-worker:latest ./worker
