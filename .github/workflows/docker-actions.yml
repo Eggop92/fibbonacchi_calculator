@@ -15,9 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build client Docker image
-      run: docker build -f ./client/Dockerfile.dev -t eggop1992/react-test:$(date +%s) ./client
+      run: docker build -f ./client/Dockerfile.dev -t eggop1992/react-test ./client
     - name: Run tests
-      run: docker run eggop1992/react-test:$(date +%s) npm test
+      run: docker run eggop1992/react-test npm test
 
   build:
     needs: test
