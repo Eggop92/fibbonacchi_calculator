@@ -152,3 +152,12 @@ kubectl apply -f k8s
 -- si usamos el directorio, kubernates aplicara los cambios de todos los ficheros dentro del directorio
 
 --usamos clusterIP services porque no queremos que sean accesibles desde fuera del nodo
+
+PVC = Persistant Volume Claim 
+Es una forma de extraer los ficheros del contenedor del pod y guardarlos a parte. De esta manera, si el pod se borra (por un fallo o error) los ficheros de la bbdd no se perderan.
+No es aconsejable que varios pods de posgres accedan al mismo volumen de datos. Se aconseja tener un solo pod de posgres.
+Volume = un objeto que permite a un contenedor almacenar datos a nivel de pod. Sobrevive al reinicio de los contenedores pero no al borrado del pod. 
+Persistant Volume = es un volume que no esta asociado a un pod en concreto, por lo que si es eliminado el volume persiste. Es el admin quien decide si borrarlo y cuando.
+    statically provisioned persistant volume = creado anteriormente por el sistema y listo para ser usado por un pod.
+    dynamically provisioned persistant volume = es creado dinamicamente cuando el pod lo solicita.
+Persistant Volume Claim = es una configuracion que da opciones a los pods para acceder a un volume persistant, pero no es un volume en si mismo. 
