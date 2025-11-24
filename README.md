@@ -151,4 +151,4 @@ kubectl apply -f k8s/client-deployment.yaml
 kubectl apply -f k8s
 -- si usamos el directorio, kubernates aplicara los cambios de todos los ficheros dentro del directorio
 
-
+--usamos clusterIP services porque no queremos que sean accesibles desde fuera del nodo
