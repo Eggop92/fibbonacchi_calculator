@@ -1,0 +1,33 @@
+##apiVersion: apps/v1
+##kind: Deployment
+##metadata:
+##  name: server-deployment
+##spec:
+##  replicas: 3
+##  selector:
+##    matchLabels:
+##      component: server #podriamos poner cualquier combinacion de label y nombre
+##  template:
+##    metadata:
+##      labels:
+##        component: server
+##    spec:
+##      containers:
+##        - name: server
+##          image: eggop1992/multi-server
+##          ports:
+##            - containerPort: 5000
+##--- ## añadimos tres dash para separar la configuracion, de manera que podemos agrupar varios ficheros en uno solo
+##apiVersion: v1
+##kind: Service
+##metadata:
+##  name: server-cluster-ip-service
+##spec:
+##  type: ClusterIP
+##  selector:
+##    component: server
+##  ports:
+##    - port: 5000
+##      targetPort: 5000
+
+## Esto es un ejemplo de como se veria el fichero todo junto en lugar de en dos partes. Segun el curso, es mas dificil encontrar la configuracion y de encontrar una convencion de nombres para que se entienda mejor. Asi que vamos a seguir con 1 config 1 fichero
