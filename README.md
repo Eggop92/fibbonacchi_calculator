@@ -132,3 +132,23 @@ Go to your AWS Elastic Beanstalk application
 It should say "Elastic Beanstalk is updating your environment"
 
 It should eventually show a green checkmark under "Health". You will now be able to access your application at the external URL provided under the environment name.
+
+
+
+## ############################################################################## ##
+##                              KUBERNATES                                        ##
+## ############################################################################## ##
+kubectl get deployments
+
+kubectl delete deployment client-deployment
+
+kubectl get services
+--no borramos el servicio kubernates, es un servicio interno que es mejor no tocar
+
+kubectl delete service client-node-port
+
+kubectl apply -f k8s/client-deployment.yaml
+kubectl apply -f k8s
+-- si usamos el directorio, kubernates aplicara los cambios de todos los ficheros dentro del directorio
+
+
