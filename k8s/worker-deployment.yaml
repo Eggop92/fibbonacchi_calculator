@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: worker
-          image: eggop1992/multi-worker
+          image: eggop1992/prod-fib-worker
           #No necesita puertos porque nadie va a llamarle
           #Necesita las variables de entorno
