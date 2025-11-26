@@ -182,3 +182,36 @@ secret_type= generic | docker-registry | tls (relacionado con http settings)
 kubectl create secret generic pgpassword --from-literal PGPASSWORD=12345asdf
 
 kubectl get secrets
+
+
+services:
+    clusterIP: Exposes a set of pods to other objects in the cluster
+    NodePort: Exposes a set of pods to the outside world (only good for dev proposes)
+    LoadBalancer: Legacy way of getting network traffic into a cluster. Only give access to one set of services. Cannot expose multiple services (aka front and backends)
+    Ingress: Exposes a set of services to the outside world. Vamos a usar el projecto *ingress-nginx*(github.com/kubernetes/ingress-nginx) no el projecto _kubernates-ingress_, son dos muy distintos. La configuracion de ingress depende del environment que se use, cambia segun sea local, GC, AWS o azure. Nosotros usamos local y GC.
+
+Un controlador en kubernates es cualquier objeto que realiza cambios para obtener un nuevo estado.
+Creamos un fichero de configuracion para ingress. Este creara un pod con ingress dentro que gestionara las llamadas y las redireccionara a los servicios correspondientes.
+Usando la configuracion de google cloud load balancer. Este creara un balancer que recibira todo el trafico y sera este quien lo redireccion a multi-client, multi-server y a un default que el mismo ingress creara por defecto. 
++ info: https://www.joyfulbikeshedding.com/blog/2018-03-26-studying-the-kubernetes-ingress-system.html
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.14.0/deploy/static/provider/cloud/deploy.yaml
+--aplica la configuracion de ingress-nginx
+
+
+
+In the upcoming lecture, we will be creating our ingress-service.yaml configuration file. Since the recording of the lecture, there has been a major API update as well as a change in how we need to specify some of these rules.
+The v1 Ingress API is now required as of Kubernetes v1.22 and the v1beta1 will no longer work.
+
+Required changes (scroll to bottom for full code):
+-Update apiVersion to v1
+-Add use-regex annotation to address certain 404 errors on localhost and Google Cloud
+-Update rewrite-target annotation
+-Add PathType to each path
+-Modify serviceName and servicePort fields to use the new syntax.
+-Update "/" and "/api" paths to resolve TypeError: this.state.seenIndexes.map is not a function error
+-Remove the Ingress class Annotation
+-Add ingressClassName field under "spec"
+
+Documentation link for reference:
+https://kubernetes.io/docs/concepts/services-networking/ingress/
