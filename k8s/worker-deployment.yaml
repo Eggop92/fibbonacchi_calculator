@@ -17,3 +17,8 @@ spec:
           image: eggop1992/prod-fib-worker
           #No necesita puertos porque nadie va a llamarle
           #Necesita las variables de entorno
+          env:
+            - name: REDIS_HOST
+              value: redis-cluster-ip-service #usamos el nombre del cluster-ip como direccion ip/host
+            - name: REDIS_PORT
+              value: "6379"

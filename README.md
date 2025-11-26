@@ -172,3 +172,13 @@ access modes:
     ReadWriteOnce: Puede usarse por un solo nodo
     ReadOnlyMany: Multiples nodos pueden leerlo
     ReadWriteMany: Multiples nodos pueden leer y escribir en el
+
+
+Secrets = tipo de objeto para almacenar datos de manera segura
+kubectl create secret <secret_type> <secret_name> --from-literal <key>=<value>
+--para crear un secret de manera manual
+secret_type= generic | docker-registry | tls (relacionado con http settings)
+
+kubectl create secret generic pgpassword --from-literal PGPASSWORD=12345asdf
+
+kubectl get secrets
