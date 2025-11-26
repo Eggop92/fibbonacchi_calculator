@@ -139,6 +139,10 @@ It should eventually show a green checkmark under "Health". You will now be able
 ##                              KUBERNATES                                        ##
 ## ############################################################################## ##
 kubectl get deployments
+kubectl get storageclass 
+    --muestra los hdd disponibles para kubernates
+kubectl describe storageclass
+    --informacion detallada del hdd disponible
 
 kubectl delete deployment client-deployment
 
@@ -161,3 +165,10 @@ Persistant Volume = es un volume que no esta asociado a un pod en concreto, por 
     statically provisioned persistant volume = creado anteriormente por el sistema y listo para ser usado por un pod.
     dynamically provisioned persistant volume = es creado dinamicamente cuando el pod lo solicita.
 Persistant Volume Claim = es una configuracion que da opciones a los pods para acceder a un volume persistant, pero no es un volume en si mismo. 
+Cuando trabajamos en local, no hay muchas opciones y parece trivial, pero existen muchos tipos de volumenes que se pueden usar o configurar (Google cloud persistent disk, Azure file, Azure disk, AWS Block store,...)
+kubernates.io/docs/concepts/storage/storage-classes/ 
+
+access modes:
+    ReadWriteOnce: Puede usarse por un solo nodo
+    ReadOnlyMany: Multiples nodos pueden leerlo
+    ReadWriteMany: Multiples nodos pueden leer y escribir en el
